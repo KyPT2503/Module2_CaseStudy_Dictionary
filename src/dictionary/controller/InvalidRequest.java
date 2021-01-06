@@ -1,6 +1,6 @@
 package dictionary.controller;
 
-public class InvalidRequest {
+public class InvalidRequest extends Request{
     private String message;
 
     public InvalidRequest() {
