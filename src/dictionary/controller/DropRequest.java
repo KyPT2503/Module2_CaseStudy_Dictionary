@@ -1,9 +1,9 @@
 package dictionary.controller;
 
-public class LookupRequest extends Request {
+public class DropRequest extends Request{
     private String keyWord;
 
-    public LookupRequest(String keyWord) {
+    public DropRequest(String keyWord) {
         this.keyWord = keyWord;
     }
 
@@ -13,6 +13,6 @@ public class LookupRequest extends Request {
 
     @Override
     public String toString() {
-        return "Request: kind_lookup, keyword_" + this.keyWord;
+        return "Request: kind_drop, keyword_" + this.keyWord;
     }
 }

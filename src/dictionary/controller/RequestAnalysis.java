@@ -3,14 +3,24 @@ package dictionary.controller;
 import java.util.regex.Pattern;
 
 public class RequestAnalysis {
+    private static RequestAnalysis instance;
 
-    static final Pattern lookupPattern = Pattern.compile("lookup\\s(.*?)");
-    static final Pattern definePattern = Pattern.compile("define\\s--(.*?)\\s+(.*?)");
-    static final Pattern dropPattern = Pattern.compile("drop\\s(.*?)");
+    private RequestAnalysis() {
+    }
 
-    public Request analysis(String request) {
+    public static RequestAnalysis getInstance() {
+        if (instance == null) {
+            synchronized (RequestAnalysis.class) {
+                if (instance == null)
+                    instance = new RequestAnalysis();
+            }
+        }
+        return instance;
+    }
+
+    public String analysis(String request) {
         request = request.trim();
-        request = request.replaceAll("\\s+", "\\s");
-        return null;
+        request = request.replaceAll("\\s+", " ");
+        return request;
     }
 }
