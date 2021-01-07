@@ -1,7 +1,6 @@
 package dictionary.controller;
 
-public class DropRequest extends Request{
-    private String keyWord;
+public class DropRequest extends Request {
 
     public DropRequest(String keyWord) {
         this.keyWord = keyWord;

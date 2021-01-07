@@ -8,7 +8,6 @@ public class DefineRequest extends Request {
     public static final String SYNONYMOUS = "synonymous";
 
     private kindOfDefine kind;
-    private String keyWord;
 
     private enum kindOfDefine {PRONOUN, ADJECTIVE, NOUN, VERB, SYNONYMOUS}
 
@@ -25,6 +24,10 @@ public class DefineRequest extends Request {
             this.kind = kindOfDefine.SYNONYMOUS;
         }
         this.keyWord = keyWord;
+    }
+
+    public kindOfDefine getKind() {
+        return kind;
     }
 
     @Override

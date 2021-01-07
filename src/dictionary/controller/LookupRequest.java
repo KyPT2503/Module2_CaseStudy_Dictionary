@@ -1,7 +1,6 @@
 package dictionary.controller;
 
 public class LookupRequest extends Request {
-    private String keyWord;
 
     public LookupRequest(String keyWord) {
         this.keyWord = keyWord;
