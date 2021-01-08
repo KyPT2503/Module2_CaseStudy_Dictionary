@@ -1,8 +1,9 @@
 package dictionary.services;
 
+import dictionary.controller.UserInterfaceController;
+
 import java.io.*;
 
-/*read and write from/to files*/
 public class FileController {
     private static FileController instance;
 
@@ -33,11 +34,7 @@ public class FileController {
         return new Word(content);
     }
 
-    public static void main(String[] args) {
-        System.out.println(getInstance().getWord("summer"));
-    }
-
-    public String getContent(String name){
+    public String getContent(String name) {
         File file = new File("words/" + name + ".txt");
         String content = "";
         try {
@@ -50,7 +47,7 @@ public class FileController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return content;
+        return content.trim();
     }
 
     public void defineWord(Word word) {
@@ -66,6 +63,8 @@ public class FileController {
 
     public void deleteWord(String name) {
         File file = new File("words/" + name + ".txt");
-        boolean result = file.delete();
+        boolean isDeleted = file.delete();
+        if (isDeleted) UserInterfaceController.getInstance().display("deleted " + name);
+        else UserInterfaceController.getInstance().display("can't delete " + name);
     }
 }

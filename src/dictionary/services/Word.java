@@ -18,12 +18,16 @@ public class Word {
         if (!matcher.matches()) {
             throw new IllegalArgumentException(CONTENT_IN_FILE_IS_NOT_VALID);
         }
+
+        reStructureContent(content);
+        content += "*";
+
         this.name = matcher.group(1);
         this.pronoun = matcher.group(2);
-        this.adjective = matcher.group(3);
-        this.noun = matcher.group(4);
-        this.verb = matcher.group(5);
-        this.synonymous = matcher.group(6);
+        this.adjective = getMeaning("Adjective", content);
+        this.noun = getMeaning("Noun", content);
+        this.verb = getMeaning("Verb", content);
+        this.synonymous = getMeaning("Synonymous", content);
     }
 
     public Word(String name, String pronoun, String noun, String verb, String adjective, String synonymous) {
@@ -33,6 +37,46 @@ public class Word {
         this.verb = verb;
         this.adjective = adjective;
         this.synonymous = synonymous;
+    }
+
+    private void setPronoun(String pronoun) {
+        this.pronoun = pronoun;
+    }
+
+    private void setNoun(String noun) {
+        this.noun = noun;
+    }
+
+    private void setVerb(String verb) {
+        this.verb = verb;
+    }
+
+    private void setAdjective(String adjective) {
+        this.adjective = adjective;
+    }
+
+    private void setSynonymous(String synonymous) {
+        this.synonymous = synonymous;
+    }
+
+    public void addDefinePronoun(String pronoun) {
+        this.setPronoun(pronoun);
+    }
+
+    public void addDefineNoun(String noun) {
+        this.setNoun(this.noun + (this.noun.equals("") ? "" : "\n") + noun);
+    }
+
+    public void addDefineAdjective(String adjective) {
+        this.setAdjective(this.adjective + (this.adjective.equals("") ? "" : "\n") + adjective);
+    }
+
+    public void addDefineVerb(String verb) {
+        this.setVerb(this.verb + (this.verb.equals("") ? "" : "\n") + verb);
+    }
+
+    public void addDefineSynonymous(String synonymous) {
+        this.setSynonymous(this.synonymous + (this.synonymous.equals("") ? "" : "\n") + synonymous);
     }
 
     public String getName() {
@@ -46,5 +90,19 @@ public class Word {
                 "* " + "Noun\n" + this.noun + "\n" +
                 "* " + "Verb\n" + this.verb + "\n" +
                 "* " + "Synonymous\n" + this.synonymous;
+    }
+
+    private static void reStructureContent(String content) {
+        content = content.replaceAll("\\*", "\\*\\*");
+        content = content.replaceFirst("\\*", "");
+    }
+
+    private static String getMeaning(String kindOfMeaning, String content) {
+        Pattern pattern = Pattern.compile("\\* " + kindOfMeaning + "((.|\\n)*?)\\*");
+        Matcher matcher = pattern.matcher(content);
+        if (matcher.find()) {
+            return matcher.group(1).trim();
+        }
+        return null;
     }
 }

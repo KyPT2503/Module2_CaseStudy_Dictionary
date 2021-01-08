@@ -23,6 +23,7 @@ public class FileControllerTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {FileController.getInstance().getWord("summer").toString(), FileController.getInstance().getContent("summer")},
+                {FileController.getInstance().getWord("firstSummer").toString(), FileController.getInstance().getContent("firstSummer")},
         });
     }
 

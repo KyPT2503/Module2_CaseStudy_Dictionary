@@ -29,7 +29,7 @@ public class UserInterfaceController {
 
     public void display(Object object) {
         System.out.println(object);
-        UserInterfaceController.getInstance().getRequest();
+        UserInterfaceController.getInstance();
     }
 
     public String getRequest() {

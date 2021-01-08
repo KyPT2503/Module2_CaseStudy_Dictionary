@@ -6,10 +6,11 @@ public class DefineRequest extends Request {
     public static final String NOUN = "noun";
     public static final String VERB = "verb";
     public static final String SYNONYMOUS = "synonymous";
+    public static final String KIND_OF_DEFINE_IS_INVALID = "kind of define is invalid.";
 
     private kindOfDefine kind;
 
-    private enum kindOfDefine {PRONOUN, ADJECTIVE, NOUN, VERB, SYNONYMOUS}
+    public enum kindOfDefine {PRONOUN, ADJECTIVE, NOUN, VERB, SYNONYMOUS}
 
     public DefineRequest(String kind, String keyWord) {
         if (kind.equals(PRONOUN)) {
@@ -22,6 +23,8 @@ public class DefineRequest extends Request {
             this.kind = kindOfDefine.VERB;
         } else if (kind.equals(SYNONYMOUS)) {
             this.kind = kindOfDefine.SYNONYMOUS;
+        } else {
+            UserInterfaceController.getInstance().display(KIND_OF_DEFINE_IS_INVALID);
         }
         this.keyWord = keyWord;
     }
